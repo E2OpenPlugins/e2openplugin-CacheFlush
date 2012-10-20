@@ -90,9 +90,9 @@ def Plugins(path, **kwargs):
 	return list
 
 def main(session,**kwargs):
-	session.open(SetupMenu)
+	session.open(CacheFlushSetupMenu)
 
-class SetupMenu(Screen, ConfigListScreen):
+class CacheFlushSetupMenu(Screen, ConfigListScreen):
 
 	skin = """
 	<screen name="CacheFlush" position="center,center" size="500,215" title="" backgroundColor="#31000000" >
