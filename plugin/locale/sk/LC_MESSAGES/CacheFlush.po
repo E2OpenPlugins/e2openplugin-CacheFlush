@@ -2,129 +2,189 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shamann\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-25 19:57+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: shamann <shamann@pobox.sk>\n"
 "Language-Team:  <shamann@pobox.sk>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Slovak\n"
 "X-Poedit-Country: SLOVAKIA\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d sekunda"
-msgstr[1] "%d sekundy"
-msgstr[2] "%d sekund"
+#: plugin.py:38
+msgid "pagecache"
+msgstr ""
 
+#: plugin.py:38
+msgid "dentries and inodes"
+msgstr ""
+
+#: plugin.py:38
+msgid "pagecache, dentries and inodes"
+msgstr ""
+
+#: plugin.py:43
+#: plugin.py:51
+#, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuta"
 msgstr[1] "%d minuty"
 msgstr[2] "%d minut"
 
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d hodina"
-msgstr[1] "%d hodiny"
-msgstr[2] "%d hodin"
+#: plugin.py:59
+#, python-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekunda"
+msgstr[1] "%d sekundy"
+msgstr[2] "%d sekund"
 
-#: plugin.py:48
-msgid "Automatic cache flushing"
-msgstr "Automatické uvolňovanie medzipamäte"
-
-#: plugin.py:71
-#: plugin.py:87
-msgid "Setup CacheFlush"
-msgstr "Nastavenie CacheFlush"
-
-#: plugin.py:80
-msgid "Save"
-msgstr "Uložiť"
-
-#: plugin.py:81
-msgid "Cancel"
-msgstr "Zrušiť"
-
-#: plugin.py:90
-msgid "Enable CacheFlush"
-msgstr "Povoliť CacheFlush"
-
-#: plugin.py:93
-msgid "Auto timeout:"
-msgstr "Automatické spustenie:"
-
-#: plugin.py:94
-msgid "Show info on screen:"
-msgstr "Zobrazovať info na obrazovke:"
-
-#: plugin.py:95
-msgid "Time of info message:"
-msgstr "Dĺžka zobrazenia info:"
-
-#: plugin.py:151
-msgid "Starting"
-msgstr "Štartuje"
-
-#: plugin.py:172
-msgid "Started"
-msgstr "Spustené"
-
-#: plugin.py:174
-msgid "Stopped"
-msgstr "Zastavené"
-
-#: plugin.py:188
-msgid "Mem cleared"
-msgstr "Pamäť uvoľnená"
-
-msgid "Memory:"
-msgstr "Pamäť:"
-
-msgid "Used:"
-msgstr "Použitá:"
-
-msgid "Free:"
-msgstr "Voľná:"
-
-msgid "Clear Now"
-msgstr "Uvoľniť teraz"
-
-msgid "MB"
-msgstr "MB"
-
-msgid "CacheFlush Status"
-msgstr "Stav CacheFlush"
-
-msgid "CacheFlush Info"
-msgstr "CacheFlush Info"
-
-msgid "Info"
-msgstr "Info"
-
-msgid "Auto timeout (5-150min):"
-msgstr "Automatické spušťanie (5-150min):"
-
-msgid "Time of info message (1-10sec):"
-msgstr "Dĺžka zobrazenia info (1-10sec):"
-
-msgid "Display plugin in:"
-msgstr "Zobrazovať plugin v:"
-
+#: plugin.py:63
 msgid "plugins"
 msgstr "pluginoch"
 
+#: plugin.py:63
 msgid "menu-system"
 msgstr "menu-systém"
 
+#: plugin.py:63
 msgid "extensions"
 msgstr "ponuka rozšírenie"
 
+#: plugin.py:63
 msgid "event info"
 msgstr "event info"
 
+#: plugin.py:64
+msgid "Default"
+msgstr ""
+
+#: plugin.py:101
+#: plugin.py:146
+#: plugin.py:172
+msgid "Setup CacheFlush"
+msgstr "Nastavenie CacheFlush"
+
+#: plugin.py:109
+msgid "Automatic cache flushing"
+msgstr "Automatické uvolňovanie medzipamäte"
+
+#: plugin.py:157
+msgid "Save"
+msgstr "Uložiť"
+
+#: plugin.py:158
+#: plugin.py:364
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: plugin.py:159
+#: plugin.py:366
+msgid "Clear Now"
+msgstr "Uvoľniť teraz"
+
+#: plugin.py:160
+msgid "Info"
+msgstr "Info"
+
+#: plugin.py:166
+#, python-format
+msgid "Uncached memory: %s kB,   ( default: %s kB )"
+msgstr ""
+
+#: plugin.py:176
+msgid "Enable CacheFlush"
+msgstr "Povoliť CacheFlush"
+
+#: plugin.py:179
+msgid "Auto timeout"
+msgstr "Automatické spustenie"
+
+#: plugin.py:180
+msgid "Time of info message"
+msgstr "Dĺžka zobrazenia info"
+
+#: plugin.py:182
+msgid "Auto timeout (5-150min)"
+msgstr "Automatické spušťanie (5-150min)"
+
+#: plugin.py:183
+msgid "Time of info message (1-10sec)"
+msgstr "Dĺžka zobrazenia info (1-10sec)"
+
+#: plugin.py:185
+msgid "Cache drop type"
+msgstr ""
+
+#: plugin.py:186
+msgid "Clean \"dirty\" cache too"
+msgstr ""
+
+#: plugin.py:188
+msgid "Show info on screen"
+msgstr "Zobrazovať info na obrazovke"
+
+#: plugin.py:190
+msgid "Display plugin in"
+msgstr "Zobrazovať plugin v"
+
+#: plugin.py:192
+msgid "Uncached memory size"
+msgstr ""
+
+#: plugin.py:244
+msgid "Memory:"
+msgstr "Pamäť:"
+
+#: plugin.py:244
+msgid "MB"
+msgstr "MB"
+
+#: plugin.py:246
+msgid "Used:"
+msgstr "Použitá:"
+
+#: plugin.py:248
+msgid "Free:"
+msgstr "Voľná:"
+
+#: plugin.py:297
+msgid "Starting"
+msgstr "Štartuje"
+
+#: plugin.py:308
+msgid "CacheFlush Status"
+msgstr "Stav CacheFlush"
+
+#: plugin.py:314
+msgid "Started"
+msgstr "Spustené"
+
+#: plugin.py:316
+msgid "Stopped"
+msgstr "Zastavené"
+
+#: plugin.py:327
+msgid "Mem cleared"
+msgstr "Pamäť uvoľnená"
+
+#: plugin.py:356
+#: plugin.py:376
+msgid "CacheFlush Info"
+msgstr "CacheFlush Info"
+
+#: plugin.py:365
 msgid "Refresh"
 msgstr "Obnoviť"
 
+#~ msgid "%d hour"
+
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d hodina"
+#~ msgstr[1] "%d hodiny"
+#~ msgstr[2] "%d hodin"

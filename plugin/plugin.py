@@ -4,11 +4,12 @@ from . import _
 #
 #    Plugin for Dreambox-Enigma2
 #    version:
-VERSION = "1.10"
+VERSION = "1.15"
 #    Coded by shamann & ims (c)2012 as ClearMem on basic idea by moulikpeta
 #	latest modyfication by ims:
 #	- ngettext, getMemory, freeMemory, WHERE_PLUGINMENU, Info, translate 
 #	- rebuild timers, less code, renamed to CacheFlush
+#	- min_free_kbyte, type drop cache, clean dirty cache
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -34,6 +35,9 @@ from Components.ProgressBar import ProgressBar
 
 config.plugins.CacheFlush = ConfigSubsection()
 config.plugins.CacheFlush.enable = ConfigYesNo(default = False)
+config.plugins.CacheFlush.type = ConfigSelection(default = "3", choices = [("1",_("pagecache")),("2",_("dentries and inodes")),("3",_("pagecache, dentries and inodes"))])
+config.plugins.CacheFlush.sync = ConfigYesNo(default = False)
+
 NGETTEXT = False
 try:	# can be used ngettext ?
 	ngettext("%d minute", "%d minutes", 5)
@@ -57,14 +61,39 @@ for i in range(1, 11):
 		choicelist.append(("%d" % i))
 config.plugins.CacheFlush.timescrinfo = ConfigSelection(default = "10", choices = choicelist)
 config.plugins.CacheFlush.where = ConfigSelection(default = "0", choices = [("0",_("plugins")),("1",_("menu-system")),("2",_("extensions")),("3",_("event info"))])
+choicelist = [("0",_("Default")),]
+for i in range(1, 21):
+	choicelist.append(("%d" % i, "%d kB" % (1024*i)))
+config.plugins.CacheFlush.uncached = ConfigSelection(default = "1", choices = choicelist)
+config.plugins.CacheFlush.free_default = ConfigInteger(default = 0, limits=(0,9999999999))
 cfg = config.plugins.CacheFlush
 
 # display mem, used, free and progressbar
 ALL = 0x17
 
-def cacheFlush():
-	system("sync")
-	system("echo 3 > /proc/sys/vm/drop_caches")
+def dropCache():
+	if cfg.sync.value:
+		system("sync")
+		print "[CacheFlush] sync"
+	if cfg.type.value == "1":   # free pagecache
+		system("echo 1 > /proc/sys/vm/drop_caches")
+		print "[CacheFlush] free pagecache"
+	elif cfg.type.value == "2": # free dentries and inodes
+		system("echo 2 > /proc/sys/vm/drop_caches")
+		print "[CacheFlush] free dentries and inodes"
+	elif cfg.type.value == "3": # free pagecache, dentries and inodes
+		system("echo 3 > /proc/sys/vm/drop_caches")
+		print "[CacheFlush] free pagecache, dentries and inodes"
+
+def getMinFreeKbytes():
+	for line in open('/proc/sys/vm/min_free_kbytes','r'):
+		line = line.strip()
+	print "[CacheFlush] min_free_kbytes is %s kB" % line
+	return line
+
+def setMinFreeKbytes(size):
+	system("echo %d > /proc/sys/vm/min_free_kbytes" % (size))
+	print "[CacheFlush] set min_free_kbytes to %d kB" % size
 
 def startSetup(menuid, **kwargs):
 	if menuid != "system":
@@ -95,15 +124,17 @@ def main(session,**kwargs):
 class CacheFlushSetupMenu(Screen, ConfigListScreen):
 
 	skin = """
-	<screen name="CacheFlush" position="center,center" size="500,215" title="" backgroundColor="#31000000" >
-		<widget name="config" position="10,10" size="480,125" zPosition="1" transparent="0" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
-		<widget name="memory" position="10,145" zPosition="2" size="480,24" valign="center" halign="left" font="Regular;20" transparent="1" foregroundColor="white" />
-		<widget name="slide" position="10,170" zPosition="2" borderWidth="1" size="480,8" backgroundColor="dark" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,183" zPosition="2" size="500,2" />
-		<widget name="key_red" position="0,187" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
-		<widget name="key_green" position="120,187" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
-		<widget name="key_yellow" position="240,187" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="yellow" />
-		<widget name="key_blue" position="360,187" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
+	<screen name="CacheFlush" position="center,center" size="500,315" title="" backgroundColor="#31000000" >
+		<widget name="config" position="10,10" size="480,200" zPosition="1" transparent="0" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,223" zPosition="2" size="500,2" />
+		<widget name="min_free_kb" font="Regular;18" position="10,225" size="480,25" zPosition="2" valign="center" backgroundColor="#31000000" transparent="1" />
+		<widget name="memory" position="10,245" zPosition="2" size="480,24" valign="center" halign="left" font="Regular;20" transparent="1" foregroundColor="white" />
+		<widget name="slide" position="10,270" zPosition="2" borderWidth="1" size="480,8" backgroundColor="dark" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,283" zPosition="2" size="500,2" />
+		<widget name="key_red" position="0,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
+		<widget name="key_green" position="120,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
+		<widget name="key_yellow" position="240,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="yellow" />
+		<widget name="key_blue" position="360,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
 	</screen>"""
 	
 	def __init__(self, session):
@@ -132,6 +163,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 		self["slide"].setValue(100)
 		self["slide"].hide()
 		self["memory"] = Label()
+		self["min_free_kb"] = Label(_("Uncached memory: %s kB,   ( default: %s kB )") % ( getMinFreeKbytes(), str(cfg.free_default.value)))
 
 		self.runSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -143,17 +175,20 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 	def runSetup(self):
 		self.list = [ getConfigListEntry(_("Enable CacheFlush"), cfg.enable) ]
 		if cfg.enable.value:
-			autotext = _("Auto timeout:")
-			timetext = _("Time of info message:")
+			autotext = _("Auto timeout")
+			timetext = _("Time of info message")
 			if not NGETTEXT:
-				autotext = _("Auto timeout (5-150min):")
-				timetext = _("Time of info message (1-10sec):")
+				autotext = _("Auto timeout (5-150min)")
+				timetext = _("Time of info message (1-10sec)")
 			self.list.extend((
+				getConfigListEntry(_("Cache drop type"), cfg.type),
+				getConfigListEntry(_("Clean \"dirty\" cache too"), cfg.sync),
 				getConfigListEntry(autotext, cfg.timeout),
-				getConfigListEntry(_("Show info on screen:"), cfg.scrinfo),
+				getConfigListEntry(_("Show info on screen"), cfg.scrinfo),
 				getConfigListEntry(timetext, cfg.timescrinfo),
-				getConfigListEntry(_("Display plugin in:"), cfg.where),
+				getConfigListEntry(_("Display plugin in"), cfg.where),
 			))
+		self.list.extend((getConfigListEntry(_("Uncached memory size"), cfg.uncached),))
 
 		self["config"].list = self.list
 		self["config"].setList(self.list)
@@ -161,7 +196,8 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 	def keySave(self):
 		for x in self["config"].list:
 			x[1].save()
-		configfile.save()
+#		configfile.save()
+		self.setUncachedMemory()
 		self.close()
 
 	def keyCancel(self):
@@ -184,7 +220,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 			x()
 
 	def freeMemory(self):
-		cacheFlush()
+		dropCache()
 		self["memory"].setText(self.getMemory(ALL))
 
 	def getMemory(self, par=0x01):
@@ -223,9 +259,18 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 	def afterInfo(self, answer=False):
 		self["memory"].setText(self.getMemory(ALL))
 
+	def setUncachedMemory(self):
+		if cfg.uncached.value == "0":
+			setMinFreeKbytes(cfg.free_default.value)
+		else:
+			setMinFreeKbytes(int(cfg.uncached.value)*1024)
+
 class CacheFlushAutoMain():
 	def __init__(self):
 		self.dialog = None
+		if cfg.free_default.value == 0:
+			cfg.free_default.value = int(getMinFreeKbytes())
+			cfg.free_default.save()
 
 	def startCacheFlush(self, session):
 		self.dialog = session.instantiateDialog(CacheFlushAutoScreen)
@@ -256,6 +301,7 @@ class CacheFlushAutoScreen(Screen):
 		self.state = None
 		self.onLayoutFinish.append(self.__chckState)
  		self.onShow.append(self.__startsuspend)
+		self.__setUncachedMemory()
 
 	def __startsuspend(self):
 		self.setTitle(_("CacheFlush Status"))
@@ -275,7 +321,7 @@ class CacheFlushAutoScreen(Screen):
 	def __makeWhatYouNeed(self):
 		self.__chckState()
 		if cfg.enable.value:
-			cacheFlush()
+			dropCache()
 			if self.instance:
 				self['message_label'].setText(_("Mem cleared"))
 				if cfg.scrinfo.value and CacheFlushAuto.dialog is not None:
@@ -284,14 +330,21 @@ class CacheFlushAutoScreen(Screen):
 	def __endShow(self):
 		CacheFlushAuto.dialog.hide()
 
+	def __setUncachedMemory(self):
+		if cfg.uncached.value != "0":
+			setMinFreeKbytes(int(cfg.uncached.value)*1024)
+
 class CacheFlushInfoScreen(Screen):
-	skin = """<screen name="CacheFlushInfoScreen" position="center,center" zPosition="2" size="400,580" title="CacheFlush Info" backgroundColor="#31000000" >
-			<widget name="memtext" font="Regular;14" position="10,0" zPosition="2" valign="center" halign="left" size="230,530" backgroundColor="#31000000" transparent="1" />
-			<widget name="memvalue" font="Regular;14" position="250,0" zPosition="2" valign="center" halign="right" size="140,530" backgroundColor="#31000000" transparent="1" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,550" zPosition="2" size="400,2" />
-			<widget name="key_red" position="10,552" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
-			<widget name="key_green" position="130,552" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
-			<widget name="key_blue" position="260,552" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
+	skin = """<screen name="CacheFlushInfoScreen" position="center,50" zPosition="2" size="400,510" title="CacheFlush Info" backgroundColor="#31000000" >
+			<widget name="memtext" font="Regular;14" position="10,0" size="230,500" zPosition="2" valign="center" halign="left" backgroundColor="#31000000" transparent="1" />
+			<widget name="memvalue" font="Regular;14" position="250,0" size="140,500" zPosition="2" valign="center" halign="right" backgroundColor="#31000000" transparent="1" />
+			<widget name="pfree" position="180,100" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
+			<widget name="pused" position="180,380" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
+			<widget name="slide" position="270,10" size="18,460" render="Progress" zPosition="3" borderWidth="1" orientation="orBottomToTop" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,480" zPosition="2" size="400,2" />
+			<widget name="key_red" position="10,482" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
+			<widget name="key_green" position="130,482" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
+			<widget name="key_blue" position="260,482" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -310,6 +363,12 @@ class CacheFlushInfoScreen(Screen):
 
 		self['memtext'] = Label()
 		self['memvalue'] = Label()
+		self['pfree'] = Label()
+		self['pused'] = Label()
+
+		self["slide"] = ProgressBar()
+		self["slide"].setValue(100)
+
 		self.setTitle(_("CacheFlush Info") + "  " + VERSION)
 		self.onLayoutFinish.append(self.getMemInfo)
 
@@ -317,19 +376,27 @@ class CacheFlushInfoScreen(Screen):
 		try:
 			text = ""
 			value = ""
+			mem = 0
+			free = 0
 			for line in open('/proc/meminfo','r'):
-				line = line.strip().split()
-				print line
-				text += "".join((line[0],"\n"))
-				value += "".join((line[1]," ",line[2],"\n"))
+				( name, size, units ) = line.strip().split()
+				if name.find("MemTotal") != -1:
+					mem = int(size)
+				if name.find("MemFree") != -1:
+					free = int(size)
+				text += "".join((name,"\n"))
+				value += "".join((size," ",units,"\n"))
 			self['memtext'].setText(text)
 			self['memvalue'].setText(value)
+			self["slide"].setValue(int(100.0*(mem-free)/mem+0.25))
+			self['pfree'].setText("%.1f %s" % (100.*free/mem,'%'))
+			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem,'%'))
 
 		except Exception, e:
 			print "[CacheFlush] getMemory FAIL:", e
 
 	def freeMemory(self):
-		cacheFlush()
+		dropCache()
 		self.getMemInfo()
 
 	def cancel(self):
