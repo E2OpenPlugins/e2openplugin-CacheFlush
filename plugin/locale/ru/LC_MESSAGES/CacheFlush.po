@@ -1,0 +1,136 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Dima73\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-25 19:57+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dima73 <Dima-73@inbox.lv>\n"
+"Language-Team:  <Dima-73@inbox.lv>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d минута"
+msgstr[1] "%d минуты"
+msgstr[2] "%d минут"
+
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d секунда"
+msgstr[1] "%d секунды"
+msgstr[2] "%d секунд"
+
+msgid "Auto timeout"
+msgstr "Авто запуск через"
+
+msgid "Auto timeout (5-150min)"
+msgstr "Авто запуск (5-150мин)"
+
+msgid "Automatic cache flushing"
+msgstr "Автоматическая очистка кэша"
+
+msgid "Cache drop type"
+msgstr "Тип очистки кэша"
+
+msgid "CacheFlush Info"
+msgstr "CacheFlush инфо"
+
+msgid "CacheFlush Status"
+msgstr "Статус CacheFlush"
+
+msgid "Cancel"
+msgstr "Выход"
+
+msgid "Clean \"dirty\" cache too"
+msgstr "Очистить так же \"dirty\" кэш"
+
+msgid "Clear Now"
+msgstr "Очистить"
+
+msgid "Default"
+msgstr "дефолт"
+
+msgid "Display plugin in"
+msgstr "Показать плагин в "
+
+msgid "Enable CacheFlush"
+msgstr "Включить CacheFlush"
+
+msgid "Free:"
+msgstr "Своб:"
+
+msgid "Info"
+msgstr "Инфо"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "Mem cleared"
+msgstr "Память очищена"
+
+msgid "Memory:"
+msgstr "Память:"
+
+msgid "Refresh"
+msgstr "Обновить"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Setup CacheFlush"
+msgstr "Настройки CacheFlush"
+
+msgid "Show info on screen"
+msgstr "Показать инфо на экране"
+
+msgid "Started"
+msgstr "Старт"
+
+msgid "Starting"
+msgstr "Запущено"
+
+msgid "Stopped"
+msgstr "Остановлено"
+
+msgid "Time of info message"
+msgstr "Таймаут сообщения"
+
+msgid "Time of info message (1-10sec)"
+msgstr "Таймаут сообщения (1-10 сек)"
+
+msgid "Uncached memory size"
+msgstr "Объем памяти без кэша"
+
+msgid "Uncached memory: %s kB,   ( default: %s kB )"
+msgstr "Объем памяти без кэша: %s kB,   (дефолт: %s kB )"
+
+msgid "Used:"
+msgstr "Занято:"
+
+msgid "dentries and inodes"
+msgstr "dentries и inodes"
+
+msgid "event info"
+msgstr "меню событий"
+
+msgid "extensions"
+msgstr "дополнениях"
+
+msgid "menu-system"
+msgstr "меню-система"
+
+msgid "pagecache"
+msgstr "pagecache"
+
+msgid "pagecache, dentries and inodes"
+msgstr "pagecache, dentries и inodes"
+
+msgid "plugins"
+msgstr "плагинах"
