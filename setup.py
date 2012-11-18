@@ -3,7 +3,7 @@ import setup_translate
 
 pkg = 'Extensions.CacheFlush'
 setup (name = 'enigma2-plugin-extensions-cacheflush',
-       version = '1.16',
+       version = '1.17',
        description = 'periodicaly flush box cache',
        packages = [pkg],
        package_dir = {pkg: 'plugin'},
