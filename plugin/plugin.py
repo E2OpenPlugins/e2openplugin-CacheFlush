@@ -4,7 +4,7 @@ from . import _
 #
 #    Plugin for Dreambox-Enigma2
 #    version:
-VERSION = "1.15"
+VERSION = "1.16"
 #    Coded by shamann & ims (c)2012 as ClearMem on basic idea by moulikpeta
 #	latest modyfication by ims:
 #	- ngettext, getMemory, freeMemory, WHERE_PLUGINMENU, Info, translate 
@@ -335,16 +335,18 @@ class CacheFlushAutoScreen(Screen):
 			setMinFreeKbytes(int(cfg.uncached.value)*1024)
 
 class CacheFlushInfoScreen(Screen):
-	skin = """<screen name="CacheFlushInfoScreen" position="center,50" zPosition="2" size="400,510" title="CacheFlush Info" backgroundColor="#31000000" >
-			<widget name="memtext" font="Regular;14" position="10,0" size="230,500" zPosition="2" valign="center" halign="left" backgroundColor="#31000000" transparent="1" />
-			<widget name="memvalue" font="Regular;14" position="250,0" size="140,500" zPosition="2" valign="center" halign="right" backgroundColor="#31000000" transparent="1" />
-			<widget name="pfree" position="180,100" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
-			<widget name="pused" position="180,380" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
-			<widget name="slide" position="270,10" size="18,460" render="Progress" zPosition="3" borderWidth="1" orientation="orBottomToTop" />
-			<ePixmap pixmap="skin_default/div-h.png" position="0,480" zPosition="2" size="400,2" />
-			<widget name="key_red" position="10,482" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
-			<widget name="key_green" position="130,482" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
-			<widget name="key_blue" position="260,482" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
+	skin = """<screen name="CacheFlushInfoScreen" position="center,50" zPosition="2" size="540,500" title="CacheFlush Info" backgroundColor="#31000000" >
+			<widget name="lmemtext" font="Regular;16" position="10,10" size="120,500" zPosition="2" valign="top" halign="left" backgroundColor="#31000000" transparent="1" />
+			<widget name="lmemvalue" font="Regular;16" position="130,10" size="80,500" zPosition="2" valign="top" halign="right" backgroundColor="#31000000" transparent="1" />
+			<widget name="rmemtext" font="Regular;16" position="330,10" size="120,500" zPosition="2" valign="top" halign="left" backgroundColor="#31000000" transparent="1" />
+			<widget name="rmemvalue" font="Regular;16" position="450,10" size="80,500" zPosition="2" valign="top" halign="right" backgroundColor="#31000000" transparent="1" />
+			<widget name="pfree" position="200,100" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
+			<widget name="pused" position="200,370" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
+			<widget name="slide" position="280,10" size="18,445" render="Progress" zPosition="3" borderWidth="1" orientation="orBottomToTop" />
+			<ePixmap pixmap="skin_default/div-h.png" position="0,465" zPosition="2" size="540,2" />
+			<widget name="key_red" position="10,472" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
+			<widget name="key_green" position="130,472" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
+			<widget name="key_blue" position="390,472" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
 		</screen>"""
 
 	def __init__(self, session):
@@ -361,8 +363,10 @@ class CacheFlushInfoScreen(Screen):
 		self["key_green"] = Label(_("Refresh"))
 		self["key_blue"] = Label(_("Clear Now"))
 
-		self['memtext'] = Label()
-		self['memvalue'] = Label()
+		self['lmemtext'] = Label()
+		self['lmemvalue'] = Label()
+		self['rmemtext'] = Label()
+		self['rmemvalue'] = Label()
 		self['pfree'] = Label()
 		self['pused'] = Label()
 
@@ -374,20 +378,29 @@ class CacheFlushInfoScreen(Screen):
 
 	def getMemInfo(self):
 		try:
-			text = ""
-			value = ""
+			ltext = rtext = ""
+			lvalue = rvalue = ""
 			mem = 0
 			free = 0
+			i = 0
 			for line in open('/proc/meminfo','r'):
 				( name, size, units ) = line.strip().split()
 				if name.find("MemTotal") != -1:
 					mem = int(size)
 				if name.find("MemFree") != -1:
 					free = int(size)
-				text += "".join((name,"\n"))
-				value += "".join((size," ",units,"\n"))
-			self['memtext'].setText(text)
-			self['memvalue'].setText(value)
+				if i < 28:
+					ltext += "".join((name,"\n"))
+					lvalue += "".join((size," ",units,"\n"))
+				else:
+					rtext += "".join((name,"\n"))
+					rvalue += "".join((size," ",units,"\n"))
+				i += 1
+			self['lmemtext'].setText(ltext)
+			self['lmemvalue'].setText(lvalue)
+			self['rmemtext'].setText(rtext)
+			self['rmemvalue'].setText(rvalue)
+
 			self["slide"].setValue(int(100.0*(mem-free)/mem+0.25))
 			self['pfree'].setText("%.1f %s" % (100.*free/mem,'%'))
 			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem,'%'))
