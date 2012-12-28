@@ -10,6 +10,8 @@ from os import system
 from enigma import eTimer, getDesktop
 from Components.ProgressBar import ProgressBar
 
+from plugin import VERSION
+
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
@@ -121,7 +123,6 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		from plugin import VERSION
 		self.setTitle(_("Setup CacheFlush") + "  " + VERSION)
 		self["memory"].setText(self.getMemory(ALL))
 
