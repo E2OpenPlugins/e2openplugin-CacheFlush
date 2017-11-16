@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CacheFlush\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-25 19:57+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P. vyteniui@gmail.com\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.4\n"
+
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minutė"
+msgstr[1] "%d minutės"
+msgstr[2] "%d minučių"
+
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekundė"
+msgstr[1] "%d sekundės"
+msgstr[2] "%d sekundžių"
+
+msgid "Auto timeout"
+msgstr "Autopaleidimas už"
+
+msgid "Auto timeout (5-150min)"
+msgstr "Autopaleidimas už (5-150 min.)"
+
+msgid "Automatic cache flushing"
+msgstr "Automatinis talpyklos valymas"
+
+msgid "Cache drop type"
+msgstr "Talpyklos valymo būdas"
+
+msgid "CacheFlush Info"
+msgstr "CacheFlush informacija"
+
+msgid "CacheFlush Status"
+msgstr "CacheFlush būsena"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Clean \"dirty\" cache too"
+msgstr "Valyti ir \"nešvarią\" talpyklą"
+
+msgid "Clear Now"
+msgstr "Valyti dabar"
+
+msgid "Default"
+msgstr "Numatytasis"
+
+msgid "Display plugin in"
+msgstr "Rodyti įskiepį"
+
+msgid "Enable CacheFlush"
+msgstr "Įjungti CacheFlush"
+
+msgid "Free:"
+msgstr "Laisva:"
+
+msgid "Info"
+msgstr "Informacija"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "Mem cleared"
+msgstr "Atmintis išvalyta"
+
+msgid "Memory:"
+msgstr "Atmintis:"
+
+msgid "Refresh"
+msgstr "Atnaujinti"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Setup CacheFlush"
+msgstr "CacheFlush sąranka"
+
+msgid "Show info on screen"
+msgstr "Rodyti informaciją ekrane"
+
+msgid "Started"
+msgstr "Pradžia"
+
+msgid "Starting"
+msgstr "Pradedama"
+
+msgid "Stopped"
+msgstr "Nutraukta"
+
+msgid "Time of info message"
+msgstr "Pranešimo rodymo laikas"
+
+msgid "Time of info message (1-10sec)"
+msgstr "Pranešimo rodymo laikas (1-10sec)"
+
+msgid "Uncached memory size"
+msgstr "Pagrindinės stminties dydis"
+
+msgid "Uncached memory: %s kB,   ( default: %s kB )"
+msgstr "Pagrindinės stminties dydis: %s kB,   (numatytasis: %s kB )"
+
+msgid "Used:"
+msgstr "Naudojama:"
+
+msgid "dentries and inodes"
+msgstr "dentry ir inode"
+
+msgid "event info"
+msgstr "įvykių meniu"
+
+msgid "extensions"
+msgstr "plėtiniuose"
+
+msgid "menu-system"
+msgstr "meniu - sistema"
+
+msgid "pagecache"
+msgstr "pagecache"
+
+msgid "pagecache, dentries and inodes"
+msgstr "pagecache, dentry ir inode"
+
+msgid "plugins"
+msgstr "įskiepiuose"
