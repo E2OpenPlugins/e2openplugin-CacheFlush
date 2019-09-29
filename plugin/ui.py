@@ -80,11 +80,11 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 	skin = """
 	<screen name="CacheFlush" position="center,center" size="500,315" title="" backgroundColor="#31000000" >
 		<widget name="config" position="10,10" size="480,200" zPosition="1" transparent="0" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="div-h.png" position="0,223" zPosition="2" size="500,2" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,223" zPosition="2" size="500,2" />
 		<widget name="min_free_kb" font="Regular;18" position="10,225" size="480,25" zPosition="2" valign="center" backgroundColor="#31000000" transparent="1" />
 		<widget name="memory" position="10,245" zPosition="2" size="480,24" valign="center" halign="left" font="Regular;20" transparent="1" foregroundColor="white" />
 		<widget name="slide" position="10,270" zPosition="2" borderWidth="1" size="480,8" backgroundColor="dark" />
-		<ePixmap pixmap="div-h.png" position="0,283" zPosition="2" size="500,2" />
+		<ePixmap pixmap="skin_default/div-h.png" position="0,283" zPosition="2" size="500,2" />
 		<widget name="key_red" position="0,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
 		<widget name="key_green" position="120,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
 		<widget name="key_yellow" position="240,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="yellow" />
@@ -302,7 +302,7 @@ class CacheFlushInfoScreen(Screen):
 				<widget name="pfree" position="240,115" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
 				<widget name="pused" position="240,390" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
 				<widget name="slide" position="320,10" size="18,500" render="Progress" zPosition="3" borderWidth="1" orientation="orBottomToTop" />
-				<ePixmap pixmap="div-h.png" position="0,519" zPosition="2" size="620,2" />
+				<ePixmap pixmap="skin_default/div-h.png" position="0,519" zPosition="2" size="620,2" />
 				<widget name="key_red" position="10,522" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
 				<widget name="key_green" position="130,522" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
 				<widget name="key_blue" position="390,522" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
@@ -316,7 +316,7 @@ class CacheFlushInfoScreen(Screen):
 				<widget name="pfree" position="200,100" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
 				<widget name="pused" position="200,370" size="70,20" font="Regular;14" zPosition="3" halign="right" backgroundColor="#31000000" transparent="1" />
 				<widget name="slide" position="280,10" size="18,445" render="Progress" zPosition="3" borderWidth="1" orientation="orBottomToTop" />
-				<ePixmap pixmap="div-h.png" position="0,465" zPosition="2" size="540,2" />
+				<ePixmap pixmap="skin_default/div-h.png" position="0,465" zPosition="2" size="540,2" />
 				<widget name="key_red" position="10,472" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="red" />
 				<widget name="key_green" position="130,472" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="green" />
 				<widget name="key_blue" position="390,472" zPosition="2" size="130,28" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
