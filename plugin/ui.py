@@ -260,7 +260,7 @@ class CacheFlushAutoScreen(Screen):
 		self.showTimer.timeout.get().append(self.__endShow)
 		self.state = None
 		self.onLayoutFinish.append(self.__chckState)
- 		self.onShow.append(self.__startsuspend)
+		self.onShow.append(self.__startsuspend)
 		self.__setUncachedMemory()
 
 	def __startsuspend(self):
