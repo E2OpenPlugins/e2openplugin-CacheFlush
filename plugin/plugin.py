@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages  	 
 from . import _
 #################################################################################
@@ -27,7 +28,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import ConfigSubsection, config, ConfigSelection
 
 config.plugins.CacheFlush = ConfigSubsection()
-config.plugins.CacheFlush.where = ConfigSelection(default = "0", choices = [("0",_("plugins")),("1",_("menu-system")),("2",_("extensions")),("3",_("event info"))])
+config.plugins.CacheFlush.where = ConfigSelection(default = "0", choices = [("0", _("plugins")), ("1", _("menu-system")), ("2", _("extensions")), ("3", _("event info"))])
 
 def startSetup(menuid, **kwargs):
 	if menuid != "system":
@@ -36,11 +37,11 @@ def startSetup(menuid, **kwargs):
 
 def sessionAutostart(reason, **kwargs):
 	if reason == 0:
-		import ui
+		from . import ui
 		ui.CacheFlushAuto.startCacheFlush(kwargs["session"])
 
 def main(session,**kwargs):
-	import ui
+	from . import ui
 	session.open(ui.CacheFlushSetupMenu)
 
 def Plugins(path, **kwargs):

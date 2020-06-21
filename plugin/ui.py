@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import print_function
 # for localized messages  	 
 from . import _
 
@@ -10,22 +12,22 @@ from os import system
 from enigma import eTimer, getDesktop
 from Components.ProgressBar import ProgressBar
 
-from plugin import VERSION
+from .plugin import VERSION
 
 HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
 
 config.plugins.CacheFlush.enable = ConfigYesNo(default = False)
-config.plugins.CacheFlush.type = ConfigSelection(default = "3", choices = [("1",_("pagecache")),("2",_("dentries and inodes")),("3",_("pagecache, dentries and inodes"))])
+config.plugins.CacheFlush.type = ConfigSelection(default = "3", choices = [("1", _("pagecache")), ("2", _("dentries and inodes")), ("3", _("pagecache, dentries and inodes"))])
 config.plugins.CacheFlush.sync = ConfigYesNo(default = False)
 
 NGETTEXT = False
 try:	# can be used ngettext ?
 	ngettext("%d minute", "%d minutes", 5)
 	NGETTEXT = True
-except Exception, e:
-	print "[CacheFlush] ngettext is not supported:", e
+except Exception as e:
+	print("[CacheFlush] ngettext is not supported:", e)
 choicelist = []
 for i in range(5, 151, 5):
 	if NGETTEXT:
@@ -41,11 +43,11 @@ for i in range(1, 11):
 	else:
 		choicelist.append(("%d" % i))
 config.plugins.CacheFlush.timescrinfo = ConfigSelection(default = "10", choices = choicelist)
-choicelist = [("0",_("Default")),]
+choicelist = [("0", _("Default")),]
 for i in range(1, 21):
 	choicelist.append(("%d" % i, "%d kB" % (1024*i)))
 config.plugins.CacheFlush.uncached = ConfigSelection(default = "1", choices = choicelist)
-config.plugins.CacheFlush.free_default = ConfigInteger(default = 0, limits=(0,9999999999))
+config.plugins.CacheFlush.free_default = ConfigInteger(default = 0, limits=(0, 9999999999))
 cfg = config.plugins.CacheFlush
 
 # display mem, used, free and progressbar
@@ -54,26 +56,26 @@ ALL = 0x17
 def dropCache():
 	if cfg.sync.value:
 		system("sync")
-		print "[CacheFlush] sync"
+		print("[CacheFlush] sync")
 	if cfg.type.value == "1":   # free pagecache
 		system("echo 1 > /proc/sys/vm/drop_caches")
-		print "[CacheFlush] free pagecache"
+		print("[CacheFlush] free pagecache")
 	elif cfg.type.value == "2": # free dentries and inodes
 		system("echo 2 > /proc/sys/vm/drop_caches")
-		print "[CacheFlush] free dentries and inodes"
+		print("[CacheFlush] free dentries and inodes")
 	elif cfg.type.value == "3": # free pagecache, dentries and inodes
 		system("echo 3 > /proc/sys/vm/drop_caches")
-		print "[CacheFlush] free pagecache, dentries and inodes"
+		print("[CacheFlush] free pagecache, dentries and inodes")
 
 def getMinFreeKbytes():
-	for line in open('/proc/sys/vm/min_free_kbytes','r'):
+	for line in open('/proc/sys/vm/min_free_kbytes', 'r'):
 		line = line.strip()
-	print "[CacheFlush] min_free_kbytes is %s kB" % line
+	print("[CacheFlush] min_free_kbytes is %s kB" % line)
 	return line
 
 def setMinFreeKbytes(size):
 	system("echo %d > /proc/sys/vm/min_free_kbytes" % (size))
-	print "[CacheFlush] set min_free_kbytes to %d kB" % size
+	print("[CacheFlush] set min_free_kbytes to %d kB" % size)
 
 class CacheFlushSetupMenu(Screen, ConfigListScreen):
 
@@ -180,7 +182,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 	def getMemory(self, par=0x01):
 		try:
 			mm = mu = mf = 0
-			for line in open('/proc/meminfo','r'):
+			for line in open('/proc/meminfo', 'r'):
 				line = line.strip()
 				if "MemTotal:" in line:
 					line = line.split()
@@ -194,17 +196,17 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 			self["slide"].hide()
 			memory = ""
 			if par&0x01:
-				memory += "".join((_("Memory:")," %d " % (mm/1024),_("MB"),"  "))
+				memory += "".join((_("Memory:"), " %d " % (mm/1024), _("MB"), "  "))
 			if par&0x02:
-				memory += "".join((_("Used:")," %.2f%s" % (100.*mu/mm,'%'),"  "))
+				memory += "".join((_("Used:"), " %.2f%s" % (100.*mu/mm, '%'), "  "))
 			if par&0x04:
-				memory += "".join((_("Free:")," %.2f%s" % (100.*mf/mm,'%')))
+				memory += "".join((_("Free:"), " %.2f%s" % (100.*mf/mm, '%')))
 			if par&0x10:
 				self["slide"].setValue(int(100.0*mu/mm+0.25))
 				self["slide"].show()
 			return memory
-		except Exception, e:
-			print "[CacheFlush] getMemory FAIL:", e
+		except Exception as e:
+			print("[CacheFlush] getMemory FAIL:", e)
 			return ""
 
 	def memoryInfo(self):
@@ -356,18 +358,18 @@ class CacheFlushInfoScreen(Screen):
 			mem = 0
 			free = 0
 			i = 0
-			for line in open('/proc/meminfo','r'):
+			for line in open('/proc/meminfo', 'r'):
 				( name, size, units ) = line.strip().split()
 				if name.find("MemTotal") != -1:
 					mem = int(size)
 				if name.find("MemFree") != -1:
 					free = int(size)
 				if i < 28:
-					ltext += "".join((name,"\n"))
-					lvalue += "".join((size," ",units,"\n"))
+					ltext += "".join((name, "\n"))
+					lvalue += "".join((size, " ", units, "\n"))
 				else:
-					rtext += "".join((name,"\n"))
-					rvalue += "".join((size," ",units,"\n"))
+					rtext += "".join((name, "\n"))
+					rvalue += "".join((size, " ", units, "\n"))
 				i += 1
 			self['lmemtext'].setText(ltext)
 			self['lmemvalue'].setText(lvalue)
@@ -375,11 +377,11 @@ class CacheFlushInfoScreen(Screen):
 			self['rmemvalue'].setText(rvalue)
 
 			self["slide"].setValue(int(100.0*(mem-free)/mem+0.25))
-			self['pfree'].setText("%.1f %s" % (100.*free/mem,'%'))
-			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem,'%'))
+			self['pfree'].setText("%.1f %s" % (100.*free/mem, '%'))
+			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem, '%'))
 
-		except Exception, e:
-			print "[CacheFlush] getMemory FAIL:", e
+		except Exception as e:
+			print("[CacheFlush] getMemory FAIL:", e)
 
 	def freeMemory(self):
 		dropCache()
