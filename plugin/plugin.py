@@ -27,7 +27,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import ConfigSubsection, config, ConfigSelection
 
 config.plugins.CacheFlush = ConfigSubsection()
-config.plugins.CacheFlush.where = ConfigSelection(default = "0", choices = [("0",_("plugins")),("1",_("menu-system")),("2",_("extensions")),("3",_("event info"))])
+config.plugins.CacheFlush.where = ConfigSelection(default="0", choices=[("0",_("plugins")),("1",_("menu-system")),("2",_("extensions")),("3",_("event info"))])
 
 def startSetup(menuid, **kwargs):
 	if menuid != "system":
@@ -48,12 +48,12 @@ def Plugins(path, **kwargs):
 	descr = _("Automatic cache flushing")
 	list = [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionAutostart),]
 	if config.plugins.CacheFlush.where.value == "0":
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart = True, icon = 'plugin.png', fnc=main))
+		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=True, icon='plugin.png', fnc=main))
 	elif config.plugins.CacheFlush.where.value == "1":
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=startSetup))
+		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_MENU, needsRestart=True, fnc=startSetup))
 	elif config.plugins.CacheFlush.where.value == "2":
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = True, fnc=main))
+		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=True, fnc=main))
 	elif config.plugins.CacheFlush.where.value == "3":
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EVENTINFO, needsRestart = True, fnc=main))
+		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EVENTINFO, needsRestart=True, fnc=main))
 	return list
 

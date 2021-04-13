@@ -16,9 +16,9 @@ HD = False
 if getDesktop(0).size().width() >= 1280:
 	HD = True
 
-config.plugins.CacheFlush.enable = ConfigYesNo(default = False)
-config.plugins.CacheFlush.type = ConfigSelection(default = "3", choices = [("1",_("pagecache")),("2",_("dentries and inodes")),("3",_("pagecache, dentries and inodes"))])
-config.plugins.CacheFlush.sync = ConfigYesNo(default = False)
+config.plugins.CacheFlush.enable = ConfigYesNo(default=False)
+config.plugins.CacheFlush.type = ConfigSelection(default="3", choices=[("1",_("pagecache")),("2",_("dentries and inodes")),("3",_("pagecache, dentries and inodes"))])
+config.plugins.CacheFlush.sync = ConfigYesNo(default=False)
 
 NGETTEXT = False
 try:	# can be used ngettext ?
@@ -32,20 +32,20 @@ for i in range(5, 151, 5):
 		choicelist.append(("%d" % i, ngettext("%d minute", "%d minutes", i) % i))
 	else:
 		choicelist.append(("%d" % i))
-config.plugins.CacheFlush.timeout = ConfigSelection(default = "30", choices = choicelist)
-config.plugins.CacheFlush.scrinfo = ConfigYesNo(default = True)
+config.plugins.CacheFlush.timeout = ConfigSelection(default="30", choices=choicelist)
+config.plugins.CacheFlush.scrinfo = ConfigYesNo(default=True)
 choicelist = []
 for i in range(1, 11):
 	if NGETTEXT:
 		choicelist.append(("%d" % i, ngettext("%d second", "%d seconds", i) % i))
 	else:
 		choicelist.append(("%d" % i))
-config.plugins.CacheFlush.timescrinfo = ConfigSelection(default = "10", choices = choicelist)
+config.plugins.CacheFlush.timescrinfo = ConfigSelection(default="10", choices=choicelist)
 choicelist = [("0",_("Default")),]
 for i in range(1, 21):
 	choicelist.append(("%d" % i, "%d kB" % (1024*i)))
-config.plugins.CacheFlush.uncached = ConfigSelection(default = "1", choices = choicelist)
-config.plugins.CacheFlush.free_default = ConfigInteger(default = 0, limits=(0,9999999999))
+config.plugins.CacheFlush.uncached = ConfigSelection(default="1", choices=choicelist)
+config.plugins.CacheFlush.free_default = ConfigInteger(default=0, limits=(0,9999999999))
 cfg = config.plugins.CacheFlush
 
 # display mem, used, free and progressbar
@@ -96,7 +96,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 
 		self.onChangedEntry = [ ]
 		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self.setup_title = _("Setup CacheFlush")
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
