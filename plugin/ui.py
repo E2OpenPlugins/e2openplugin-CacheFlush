@@ -94,8 +94,8 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
-		self.onChangedEntry = [ ]
-		self.list = [ ]
+		self.onChangedEntry = []
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self.setup_title = _("Setup CacheFlush")
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -117,7 +117,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 		self["slide"].setValue(100)
 		self["slide"].hide()
 		self["memory"] = Label()
-		self["min_free_kb"] = Label(_("Uncached memory: %s kB,   ( default: %s kB )") % ( getMinFreeKbytes(), str(cfg.free_default.value)))
+		self["min_free_kb"] = Label(_("Uncached memory: %s kB,   ( default: %s kB )") % (getMinFreeKbytes(), str(cfg.free_default.value)))
 
 		self.runSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -127,7 +127,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 		self["memory"].setText(self.getMemory(ALL))
 
 	def runSetup(self):
-		self.list = [ getConfigListEntry(_("Enable CacheFlush"), cfg.enable) ]
+		self.list = [getConfigListEntry(_("Enable CacheFlush"), cfg.enable)]
 		if cfg.enable.value:
 			autotext = _("Auto timeout")
 			timetext = _("Time of info message")
@@ -357,7 +357,7 @@ class CacheFlushInfoScreen(Screen):
 			free = 0
 			i = 0
 			for line in open('/proc/meminfo','r'):
-				( name, size, units ) = line.strip().split()
+				(name, size, units) = line.strip().split()
 				if name.find("MemTotal") != -1:
 					mem = int(size)
 				if name.find("MemFree") != -1:

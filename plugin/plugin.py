@@ -31,7 +31,7 @@ config.plugins.CacheFlush.where = ConfigSelection(default="0", choices=[("0",_("
 
 def startSetup(menuid, **kwargs):
 	if menuid != "system":
-		return [ ]
+		return []
 	return [(_("Setup CacheFlush"), main, "CacheFlush", None)]
 
 def sessionAutostart(reason, **kwargs):
