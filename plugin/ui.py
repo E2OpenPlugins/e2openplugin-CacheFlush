@@ -1,4 +1,4 @@
-# for localized messages  	 
+# for localized messages
 from . import _
 
 from Screens.Screen import Screen
@@ -94,7 +94,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 		<widget name="key_yellow" position="240,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="yellow" />
 		<widget name="key_blue" position="360,287" zPosition="2" size="120,30" valign="center" halign="center" font="Regular;22" transparent="1" foregroundColor="blue" />
 	</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 

@@ -1,4 +1,4 @@
-# for localized messages  	 
+# for localized messages
 from . import _
 #################################################################################
 #
@@ -7,7 +7,7 @@ from . import _
 VERSION = "1.17"
 #    Coded by shamann & ims (c)2012 as ClearMem on basic idea by moulikpeta
 #	latest modyfication by ims:
-#	- ngettext, getMemory, freeMemory, WHERE_PLUGINMENU, Info, translate 
+#	- ngettext, getMemory, freeMemory, WHERE_PLUGINMENU, Info, translate
 #	- rebuild timers, less code, renamed to CacheFlush
 #	- min_free_kbyte, type drop cache, clean dirty cache
 #
@@ -20,7 +20,7 @@ VERSION = "1.17"
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
-#    
+#
 #################################################################################
 
 from Plugins.Plugin import PluginDescriptor
@@ -60,4 +60,3 @@ def Plugins(path, **kwargs):
 	elif config.plugins.CacheFlush.where.value == "3":
 		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EVENTINFO, needsRestart=True, fnc=main))
 	return list
-
