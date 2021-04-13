@@ -29,19 +29,23 @@ from Components.config import ConfigSubsection, config, ConfigSelection
 config.plugins.CacheFlush = ConfigSubsection()
 config.plugins.CacheFlush.where = ConfigSelection(default="0", choices=[("0", _("plugins")), ("1", _("menu-system")), ("2", _("extensions")), ("3", _("event info"))])
 
+
 def startSetup(menuid, **kwargs):
 	if menuid != "system":
 		return []
 	return [(_("Setup CacheFlush"), main, "CacheFlush", None)]
+
 
 def sessionAutostart(reason, **kwargs):
 	if reason == 0:
 		import ui
 		ui.CacheFlushAuto.startCacheFlush(kwargs["session"])
 
+
 def main(session, **kwargs):
 	import ui
 	session.open(ui.CacheFlushSetupMenu)
+
 
 def Plugins(path, **kwargs):
 	name = "CacheFlush"

@@ -51,6 +51,7 @@ cfg = config.plugins.CacheFlush
 # display mem, used, free and progressbar
 ALL = 0x17
 
+
 def dropCache():
 	if cfg.sync.value:
 		system("sync")
@@ -65,15 +66,18 @@ def dropCache():
 		system("echo 3 > /proc/sys/vm/drop_caches")
 		print "[CacheFlush] free pagecache, dentries and inodes"
 
+
 def getMinFreeKbytes():
 	for line in open('/proc/sys/vm/min_free_kbytes', 'r'):
 		line = line.strip()
 	print "[CacheFlush] min_free_kbytes is %s kB" % line
 	return line
 
+
 def setMinFreeKbytes(size):
 	system("echo %d > /proc/sys/vm/min_free_kbytes" % (size))
 	print "[CacheFlush] set min_free_kbytes to %d kB" % size
+
 
 class CacheFlushSetupMenu(Screen, ConfigListScreen):
 
@@ -219,6 +223,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 		else:
 			setMinFreeKbytes(int(cfg.uncached.value) * 1024)
 
+
 class CacheFlushAutoMain():
 	def __init__(self):
 		self.dialog = None
@@ -236,7 +241,9 @@ class CacheFlushAutoMain():
 		else:
 			self.dialog.hide()
 
+
 CacheFlushAuto = CacheFlushAutoMain()
+
 
 class CacheFlushAutoScreen(Screen):
 	if HD:
@@ -291,6 +298,7 @@ class CacheFlushAutoScreen(Screen):
 	def __setUncachedMemory(self):
 		if cfg.uncached.value != "0":
 			setMinFreeKbytes(int(cfg.uncached.value) * 1024)
+
 
 class CacheFlushInfoScreen(Screen):
 	if HD:
