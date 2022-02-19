@@ -25,7 +25,7 @@ NGETTEXT = False
 try:	# can be used ngettext ?
 	ngettext("%d minute", "%d minutes", 5)
 	NGETTEXT = True
-except Exception, e:
+except Exception as e:
 	print("[CacheFlush] ngettext is not supported:", e)
 choicelist = []
 for i in range(5, 151, 5):
@@ -208,7 +208,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 				self["slide"].setValue(int(100.0 * mu / mm + 0.25))
 				self["slide"].show()
 			return memory
-		except Exception, e:
+		except Exception as e:
 			print("[CacheFlush] getMemory FAIL:", e)
 			return ""
 
@@ -387,7 +387,7 @@ class CacheFlushInfoScreen(Screen):
 			self['pfree'].setText("%.1f %s" % (100. * free / mem, '%'))
 			self['pused'].setText("%.1f %s" % (100. * (mem - free) / mem, '%'))
 
-		except Exception, e:
+		except Exception as e:
 			print("[CacheFlush] getMemory FAIL:", e)
 
 	def freeMemory(self):
