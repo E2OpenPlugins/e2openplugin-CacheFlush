@@ -1,3 +1,4 @@
+from __future__ import print_function
 # for localized messages
 from . import _
 
@@ -25,7 +26,7 @@ try:	# can be used ngettext ?
 	ngettext("%d minute", "%d minutes", 5)
 	NGETTEXT = True
 except Exception, e:
-	print "[CacheFlush] ngettext is not supported:", e
+	print("[CacheFlush] ngettext is not supported:", e)
 choicelist = []
 for i in range(5, 151, 5):
 	if NGETTEXT:
@@ -55,28 +56,28 @@ ALL = 0x17
 def dropCache():
 	if cfg.sync.value:
 		system("sync")
-		print "[CacheFlush] sync"
+		print("[CacheFlush] sync")
 	if cfg.type.value == "1":   # free pagecache
 		system("echo 1 > /proc/sys/vm/drop_caches")
-		print "[CacheFlush] free pagecache"
+		print("[CacheFlush] free pagecache")
 	elif cfg.type.value == "2": # free dentries and inodes
 		system("echo 2 > /proc/sys/vm/drop_caches")
-		print "[CacheFlush] free dentries and inodes"
+		print("[CacheFlush] free dentries and inodes")
 	elif cfg.type.value == "3": # free pagecache, dentries and inodes
 		system("echo 3 > /proc/sys/vm/drop_caches")
-		print "[CacheFlush] free pagecache, dentries and inodes"
+		print("[CacheFlush] free pagecache, dentries and inodes")
 
 
 def getMinFreeKbytes():
 	for line in open('/proc/sys/vm/min_free_kbytes', 'r'):
 		line = line.strip()
-	print "[CacheFlush] min_free_kbytes is %s kB" % line
+	print("[CacheFlush] min_free_kbytes is %s kB" % line)
 	return line
 
 
 def setMinFreeKbytes(size):
 	system("echo %d > /proc/sys/vm/min_free_kbytes" % (size))
-	print "[CacheFlush] set min_free_kbytes to %d kB" % size
+	print("[CacheFlush] set min_free_kbytes to %d kB" % size)
 
 
 class CacheFlushSetupMenu(Screen, ConfigListScreen):
@@ -208,7 +209,7 @@ class CacheFlushSetupMenu(Screen, ConfigListScreen):
 				self["slide"].show()
 			return memory
 		except Exception, e:
-			print "[CacheFlush] getMemory FAIL:", e
+			print("[CacheFlush] getMemory FAIL:", e)
 			return ""
 
 	def memoryInfo(self):
@@ -387,7 +388,7 @@ class CacheFlushInfoScreen(Screen):
 			self['pused'].setText("%.1f %s" % (100. * (mem - free) / mem, '%'))
 
 		except Exception, e:
-			print "[CacheFlush] getMemory FAIL:", e
+			print("[CacheFlush] getMemory FAIL:", e)
 
 	def freeMemory(self):
 		dropCache()
