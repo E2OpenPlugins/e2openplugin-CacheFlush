@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CacheFlush\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-15 19:20+0200\n"
+"PO-Revision-Date: 2024-03-16 07:19+0200\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Orlandox\n"
+"Language: fi_FI\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuutti"
+msgstr[1] "%d minuuttia"
+
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekunti"
+msgstr[1] "%d sekuntia"
+
+msgid "Auto timeout"
+msgstr "Automaattinen aikakatkaisu"
+
+msgid "Auto timeout (5-150min)"
+msgstr "Automaattinen aikakatkaisu (5-150min)"
+
+msgid "Automatic cache flushing"
+msgstr "Automaattinen välimuistin huuhtelu"
+
+msgid "Cache drop type"
+msgstr "Välimuistin pudotustyyppi"
+
+msgid "CacheFlush Info"
+msgstr "CacheFlush:n Tiedot"
+
+msgid "CacheFlush Status"
+msgstr "CacheFlush:n Tila"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Clean \"dirty\" cache too"
+msgstr "Puhdista \"likainen\" välimuisti myös"
+
+msgid "Clear Now"
+msgstr "Tyhjennä nyt"
+
+msgid "Default"
+msgstr "Oletus"
+
+msgid "Display plugin in"
+msgstr "Näytä lisäosa täällä"
+
+msgid "Enable CacheFlush"
+msgstr "Ota CacheFlush käyttöön"
+
+msgid "Free:"
+msgstr "Vapaana:"
+
+msgid "Info"
+msgstr "Tiedot"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "Mem cleared"
+msgstr "Muisti tyhjennetty"
+
+msgid "Memory:"
+msgstr "Muistia:"
+
+msgid "Refresh"
+msgstr "Virkistä"
+
+msgid "Save"
+msgstr "Tallenna"
+
+msgid "Setup CacheFlush"
+msgstr "Asetukset: CacheFlush"
+
+msgid "Show info on screen"
+msgstr "Näytä tiedot ruudulla"
+
+msgid "Started"
+msgstr "Käynnistynyt"
+
+msgid "Starting"
+msgstr "Käynnistymässä"
+
+msgid "Stopped"
+msgstr "Pysäytetty"
+
+msgid "Time of info message"
+msgstr "Tietosanoman näyttöaika"
+
+msgid "Time of info message (1-10sec)"
+msgstr "Tietosanoman näyttöaika (1-10sek)"
+
+msgid "Uncached memory size"
+msgstr "Välimuistittoman muistin koko"
+
+msgid "Uncached memory: %s kB,   ( default: %s kB )"
+msgstr "Välimuistiton muisti: %s kB,   ( oletus: %s kB )"
+
+msgid "Used:"
+msgstr "Käytetty:"
+
+msgid "dentries and inodes"
+msgstr "dentries ja inodes"
+
+msgid "event info"
+msgstr "ohjelmatiedot"
+
+msgid "extensions"
+msgstr "laajennukset"
+
+msgid "menu-system"
+msgstr "valikossa"
+
+msgid "pagecache"
+msgstr "sivuvälimuisti"
+
+msgid "pagecache, dentries and inodes"
+msgstr "sivuvälimuisti, dentries ja inodes"
+
+msgid "plugins"
+msgstr "lisäosat"
